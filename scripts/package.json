@@ -1,0 +1,14 @@
+{
+  "name": "afraz-portfolio-scripts",
+  "private": true,
+  "type": "module",
+  "description": "Keeps the portfolio in sync with Afraz's public Instagram and renders the page",
+  "scripts": {
+    "sync": "node sync-instagram.mjs",
+    "sync:full": "node sync-instagram.mjs --refresh-all",
+    "build": "node build.mjs"
+  },
+  "dependencies": {
+    "sharp": "^0.34.0"
+  }
+}

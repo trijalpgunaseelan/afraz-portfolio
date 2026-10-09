@@ -1,0 +1,118 @@
+# Keeps the portfolio in step with @afrxz.fx on Instagram, with nobody's computer
+# involved. Every 3 hours (at :23, away from GitHub's busy top-of-the-hour slots,
+# since scheduled runs can be delayed or skipped) it:
+#   - adds new posts: poster, thumbnail and a muted preview loop made with ffmpeg
+#   - picks up profile changes (name, picture, followers; bio and highlights
+#     whenever Instagram lets it read the profile page)
+#   - re-checks a slice of older posts and removes ones deleted on Instagram
+#   - re-renders index.html and commits to main; Vercel redeploys from main
+# Editing data/curation.json, the styles, the script or the builder re-renders
+# the page straight away (no Instagram call).
+# GitHub turns off schedules in public repos after 60 days without activity, so a
+# quiet stretch gets a small heartbeat commit to keep this running.
+name: Sync Instagram
+
+on:
+  schedule:
+    - cron: "23 */3 * * *"
+  push:
+    branches: [main]
+    paths:
+      - data/curation.json
+      - scripts/build.mjs
+      - scripts/derive.mjs
+      - css/**
+      - js/**
+  workflow_dispatch:
+    inputs:
+      refresh_all:
+        description: "Re-read every post (captions, posters, previews)"
+        type: boolean
+        default: false
+      probe:
+        description: "Diagnostics only: comma-separated post codes to check, nothing is changed"
+        type: string
+        default: ""
+
+# Nothing by default; the job below gets only what it needs.
+permissions: {}
+
+concurrency:
+  group: sync-instagram
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    permissions:
+      contents: write   # commit synced posts and the rendered page back to main
+    steps:
+      # Actions pinned to exact commits so a moved tag can't change what runs here.
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: lts/*
+          cache: npm
+          cache-dependency-path: scripts/package-lock.json
+
+      - name: Install
+        run: npm ci --prefix scripts --no-audit --no-fund --ignore-scripts
+
+      - name: Install ffmpeg
+        if: github.event_name != 'push' && inputs.probe == ''
+        run: command -v ffmpeg || (sudo apt-get update -qq && sudo apt-get install -y -qq --no-install-recommends ffmpeg)
+
+      - name: Check posts (diagnostics)
+        if: inputs.probe != ''
+        env:
+          PROBE: ${{ inputs.probe }}   # passed as data, never pasted into the shell
+        run: node scripts/sync-instagram.mjs --probe "$PROBE"
+
+      - name: Pull posts from Instagram
+        if: github.event_name != 'push' && inputs.probe == ''
+        id: sync
+        env:
+          REFRESH_ALL: ${{ inputs.refresh_all && '1' || '' }}
+        run: node scripts/sync-instagram.mjs ${REFRESH_ALL:+--refresh-all}
+
+      - name: Render the page
+        if: inputs.probe == ''
+        run: node scripts/build.mjs
+
+      - name: Commit changes
+        if: inputs.probe == ''
+        env:
+          ADDED: ${{ steps.sync.outputs.added }}
+          REMOVED: ${{ steps.sync.outputs.removed }}
+          EVENT: ${{ github.event_name }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add data/instagram.json assets/ig assets/og.jpg .og-key index.html sitemap.xml api/_clips.json
+          added="${ADDED:-0}"
+          removed="${REMOVED:-0}"
+          if ! git diff --cached --quiet; then
+            if [ "$EVENT" = "push" ]; then
+              msg="Re-render the page"
+            elif [ "$added" != "0" ] || [ "$removed" != "0" ]; then
+              msg="Instagram: ${added} new, ${removed} removed"
+            else
+              msg="Instagram: refresh profile and posts"
+            fi
+          elif [ "$EVENT" != "push" ] && [ $(( $(date +%s) - $(git log -1 --format=%ct) )) -gt $(( 45 * 86400 )) ]; then
+            date -u +%Y-%m-%dT%H:%M:%SZ > .github/heartbeat
+            git add .github/heartbeat
+            msg="Keep the Instagram sync schedule alive"
+          else
+            exit 0
+          fi
+          git commit -m "$msg"
+          for attempt in 1 2 3; do
+            git pull --rebase origin main && git push origin HEAD:main && exit 0
+            sleep 10
+          done
+          exit 1

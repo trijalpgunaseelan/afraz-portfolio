@@ -1,0 +1,10 @@
+{
+  "_help": "Hand edits that win over the automatic ones. posts.<code>: title, kind (reel | client | edit), blurb, show (true keeps a post the duplicate check hid). hide: post codes never shown. clients: extra @handles for the 'Edited for' credits. tagline: the line under his name. about: paragraphs for the About section. Run `node scripts/build.mjs` after editing (GitHub does it for you on push).",
+  "tagline": null,
+  "about": [],
+  "clients": [],
+  "hide": [],
+  "posts": {
+    "DYuNxIFvv4p": { "title": "Brothers & Sisters Promo" }
+  }
+}
