@@ -2605,7 +2605,7 @@
    "coauthors": [],
    "tagged": [],
    "music": null,
-   "comments": 8,
+   "comments": 7,
    "gridIndex": 75,
    "media": [
     {
@@ -2631,7 +2631,7 @@
    "coauthors": [],
    "tagged": [],
    "music": null,
-   "comments": 8,
+   "comments": 7,
    "gridIndex": 76,
    "media": [
     {
@@ -2657,7 +2657,7 @@
    "coauthors": [],
    "tagged": [],
    "music": null,
-   "comments": 8,
+   "comments": 7,
    "gridIndex": 77,
    "media": [
     {
@@ -2683,7 +2683,7 @@
    "coauthors": [],
    "tagged": [],
    "music": null,
-   "comments": 8,
+   "comments": 5,
    "gridIndex": 78,
    "media": [
     {
@@ -2735,7 +2735,7 @@
    "coauthors": [],
    "tagged": [],
    "music": null,
-   "comments": 6,
+   "comments": 5,
    "gridIndex": 80,
    "media": [
     {
@@ -2761,7 +2761,7 @@
    "coauthors": [],
    "tagged": [],
    "music": null,
-   "comments": 5,
+   "comments": 4,
    "gridIndex": 81,
    "media": [
     {
@@ -2787,7 +2787,7 @@
    "coauthors": [],
    "tagged": [],
    "music": null,
-   "comments": 12,
+   "comments": 5,
    "gridIndex": 82,
    "media": [
     {
@@ -2917,7 +2917,7 @@
    "coauthors": [],
    "tagged": [],
    "music": null,
-   "comments": 12,
+   "comments": 5,
    "gridIndex": 87,
    "media": [
     {
@@ -3021,7 +3021,7 @@
    "coauthors": [],
    "tagged": [],
    "music": null,
-   "comments": 11,
+   "comments": 8,
    "gridIndex": 91,
    "media": [
     {
@@ -3142,6 +3142,6 @@
    "blocked": false
   }
  ],
- "mode": "profile",
- "updatedAt": "2026-10-09T23:25:44.236Z"
+ "mode": "embed",
+ "updatedAt": "2026-10-10T06:00:18.271Z"
 }
