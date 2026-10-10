@@ -2,7 +2,7 @@
  "username": "afrxz.fx",
  "profile": {
   "fullName": "Afraz Ali | Editor",
-  "followers": 3816,
+  "followers": 3818,
   "posts": 100,
   "pic": "assets/ig/_profile.webp",
   "picKey": "730182437_18447458227140585_1671235436442774445_n.jpg",
@@ -1325,7 +1325,7 @@
    "coauthors": [],
    "tagged": [],
    "music": null,
-   "comments": 12,
+   "comments": 7,
    "gridIndex": 26,
    "media": [
     {
@@ -1484,7 +1484,7 @@
     "title": "Thangamey",
     "artist": "Murugavel"
    },
-   "comments": 10,
+   "comments": 8,
    "gridIndex": 32,
    "media": [
     {
@@ -3047,7 +3047,7 @@
    "coauthors": [],
    "tagged": [],
    "music": null,
-   "comments": 8,
+   "comments": 7,
    "gridIndex": 92,
    "media": [
     {
@@ -3073,7 +3073,7 @@
    "coauthors": [],
    "tagged": [],
    "music": null,
-   "comments": 12,
+   "comments": 6,
    "gridIndex": 93,
    "media": [
     {
@@ -3099,7 +3099,7 @@
    "coauthors": [],
    "tagged": [],
    "music": null,
-   "comments": 12,
+   "comments": 8,
    "gridIndex": 94,
    "media": [
     {
@@ -3125,7 +3125,7 @@
    "coauthors": [],
    "tagged": [],
    "music": null,
-   "comments": 12,
+   "comments": 11,
    "gridIndex": 95,
    "media": [
     {
@@ -3143,5 +3143,5 @@
   }
  ],
  "mode": "embed",
- "updatedAt": "2026-10-10T12:40:45.137Z"
+ "updatedAt": "2026-10-10T19:20:28.721Z"
 }
