@@ -708,8 +708,15 @@ async function main() {
   } catch (e) {
     if (!(e instanceof Blocked)) throw e;
     log(`Profile page blocked (${e.message}); using the public embeds.`);
-    result = await syncViaEmbed(db, known);
-    db.mode = 'embed';
+    try {
+      result = await syncViaEmbed(db, known);
+      db.mode = 'embed';
+    } catch (embedError) {
+      if (!(embedError instanceof Blocked)) throw embedError;
+      log(`Embed reads blocked too (${embedError.message}); keeping existing data for this run.`);
+      result = { added: 0, removed: [], profile: db.profile || {} };
+      db.mode = 'blocked';
+    }
   }
   const { added, removed, profile } = result;
 
