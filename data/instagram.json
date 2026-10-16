@@ -2703,7 +2703,7 @@
    "coauthors": [],
    "tagged": [],
    "music": null,
-   "comments": 7,
+   "comments": 6,
    "gridIndex": 78,
    "media": [
     {
@@ -2833,7 +2833,7 @@
    "coauthors": [],
    "tagged": [],
    "music": null,
-   "comments": 5,
+   "comments": 4,
    "gridIndex": 83,
    "media": [
     {
@@ -2963,7 +2963,7 @@
    "coauthors": [],
    "tagged": [],
    "music": null,
-   "comments": 5,
+   "comments": 4,
    "gridIndex": 88,
    "media": [
     {
@@ -3189,5 +3189,5 @@
   }
  ],
  "mode": "embed",
- "updatedAt": "2026-10-16T16:45:08.863Z"
+ "updatedAt": "2026-10-16T21:18:16.454Z"
 }
