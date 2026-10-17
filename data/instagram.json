@@ -2339,7 +2339,7 @@
    "coauthors": [],
    "tagged": [],
    "music": null,
-   "comments": 1,
+   "comments": 2,
    "gridIndex": 64,
    "media": [
     {
@@ -2599,7 +2599,7 @@
    "coauthors": [],
    "tagged": [],
    "music": null,
-   "comments": 4,
+   "comments": 3,
    "gridIndex": 74,
    "media": [
     {
@@ -3189,5 +3189,5 @@
   }
  ],
  "mode": "embed",
- "updatedAt": "2026-10-17T15:41:51.837Z"
+ "updatedAt": "2026-10-17T20:41:47.328Z"
 }
